@@ -11,4 +11,4 @@ def sIte2(n):
         s = s + n
         print(f"{n}\t{s}")
 
-slte2(13)
+sIte2(13)
