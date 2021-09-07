@@ -4,5 +4,13 @@ def sRec1(n):
     else:
         return sRec1(n - 1) + n
 
+def sRec2(n):
+    if n == 0:
+        print(f"n\ts\n{n}\t{n}")
+        return 0
+    else:
+        s = sRec2(n - 1) + n
+        print(f"{n}\t{s}")
+        return s
 
-sRec1(3)
+sRec2(10)
