@@ -6,9 +6,9 @@ def sIte1(n):
 
 def sIte2(n):
     s = 0
-    print(f"n\ts\n{n}\t{s}")
+    print(f"n\ts\n0\t{s}")
     for i in range(n):
         s = s + n
-        print(f"{n}\t{s}")
+        print(f"{i + 1}\t{s}")
 
 sIte2(13)
