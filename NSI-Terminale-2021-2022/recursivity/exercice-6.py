@@ -20,4 +20,4 @@ for n in listen:
     for x in listex: print(f"{x}\t{n}\t{puissance(x, n)}")
 """
 
-print(puissance2(3, 4))
+print(puissance(2.5, 2500))
