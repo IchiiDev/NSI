@@ -1,5 +1,9 @@
 from math import pi
 
+"""
+Module de calcul des aires
+"""
+
 def aireCarre(x):
     """
     Calculer l'aire d'un carré
