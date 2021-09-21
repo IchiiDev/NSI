@@ -29,3 +29,5 @@ def aireTrapese(B, b, h):
 
 def aireDisque(r):
     return (r**2) * pi
+
+print("Module de calcul des aires chargé")
