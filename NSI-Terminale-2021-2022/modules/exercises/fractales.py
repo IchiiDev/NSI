@@ -24,20 +24,20 @@ def flocon(n, l=400):
         t.right(120)
     t.done()
 
-def tree(longueur=100):
+def tree(longueur=100, angle=45):
     if longueur < 10: return
 
     t.fd(longueur)
-    t.left(45)
-    tree(longueur * 0.6)
-    t.right(90)
-    tree(longueur * 0.6)
-    t.left(45)
+    t.left(angle)
+    tree(longueur * 0.6, angle)
+    t.right(angle*2)
+    tree(longueur * 0.6, angle)
+    t.left(angle)
     t.fd(-longueur)
     return
 
 if __name__ == "__main__":
     koch(3)
     flocon(3)
-    tree()
+    tree(angle=90)
     t.done()
