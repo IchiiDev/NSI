@@ -28,10 +28,13 @@ class Player():
         assert type(answer) == list
         self.__last_answer = answer
 
-    def chooseAnswer(self):
+    def chooseAnswer(self, isFirstRound=False):
         if self.isRobot() == True:
-            print(f"{self.getName()} chose a number...")
-            return random.randint(1, 10)
+            if isFirstRound == True:
+                print(f"{self.getName()} chose a number...")
+                return random.randint(1, 10)
+            else:
+                return
         else:    
             answer = int(input(f"{self.getName()}: "))
             if answer <= 10 and answer > 0:
