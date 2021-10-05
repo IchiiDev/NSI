@@ -7,6 +7,7 @@ class Player():
         self.__isRobot = robot
         self.__score = 0
         self.__number = None
+        self.__last_answer = None
 
     def getName(self):
         return self.__name
@@ -22,6 +23,10 @@ class Player():
     
     def getNumber(self):
         return self.__number
+
+    def setLastAnswer(self, answer):
+        assert type(answer) == list
+        self.__last_answer = answer
 
     def chooseAnswer(self):
         if self.isRobot() == True:
@@ -65,9 +70,11 @@ class Game():
                 return
             elif answer > self.__players[0].getNumber():
                 print("Lesser !")
+                self.__players[1].setLastAnswer([answer, "-"])
                 self.nextRound()
             else:
                 print("Greater!")
+                self.__players[1].setLastAnswer([answer, "-"])
                 self.nextRound()
         else:
             answer = self.__players[1].chooseAnswer()
@@ -75,9 +82,11 @@ class Game():
                 self.__players[1].playerWon()
             elif answer > self.__players[0].getNumber():
                 print("Lesser!")
+                self.__players[1].setLastAnswer([answer, "-"])
                 self.nextRound()
             else:
                 print("Greater !")
+                self.__players[1].setLastAnswer([answer, "-"])
                 self.nextRound()
 
     def startGame(self):
