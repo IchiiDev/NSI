@@ -54,12 +54,13 @@ class Game():
         self.__rounds +=1 
         if self.__rounds > self.__maxRound: 
             self.__players[0].playerWon()
+            return
         if self.__rounds == 1:
             number = self.__players[0].chooseAnswer()
             self.__players[0].setNumber(number)
 
             answer = self.__players[1].chooseAnswer()
-            if answer == self.__players[1].getNumber():
+            if answer == self.__players[0].getNumber():
                 self.__players[1].playerWon()
                 return
             elif answer > self.__players[0].getNumber():
