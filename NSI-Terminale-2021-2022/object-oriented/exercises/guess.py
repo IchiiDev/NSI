@@ -25,6 +25,7 @@ class Player():
 
     def chooseAnswer(self):
         if self.isRobot() == True:
+            print(f"{self.getName()} chose a number...")
             return random.randint(1, 10)
         else:    
             answer = int(input(f"{self.getName()}: "))
@@ -35,13 +36,14 @@ class Player():
                 return self.chooseAnswer()
 
     def playerWon(self):
-        self.__points += 1
-        print(f"{self.getName()} Won ! Current score: {self.getPoints()}")
+        self.__score += 1
+        print(f"{self.getName()} Won ! Current score: {self.getScore()}")
 
 class Game():
 
-    def __init__(self):
+    def __init__(self, maxRound):
         self.__rounds = 0
+        self.__maxRound = maxRound
         self.__players = []
 
     def setPlayers(self, players):
@@ -50,3 +52,44 @@ class Game():
     
     def nextRound(self):
         self.__rounds +=1 
+        if self.__rounds > self.__maxRound: 
+            self.__players[0].playerWon()
+        if self.__rounds == 1:
+            number = self.__players[0].chooseAnswer()
+            self.__players[0].setNumber(number)
+
+            answer = self.__players[1].chooseAnswer()
+            if answer == self.__players[1].getNumber():
+                self.__players[1].playerWon()
+                return
+            elif answer > self.__players[0].getNumber():
+                print("Lesser !")
+                self.nextRound()
+            else:
+                print("Greater!")
+                self.nextRound()
+        else:
+            answer = self.__players[1].chooseAnswer()
+            if answer == self.__players[1].getNumber():
+                self.__players[1].playerWon()
+            elif answer > self.__players[0].getNumber():
+                print("Lesser!")
+                self.nextRound()
+            else:
+                print("Greater !")
+                self.nextRound()
+
+    def startGame(self):
+        random.shuffle(self.__players)
+        
+        self.__rounds == 0
+        [player.setNumber(None) for player in self.__players]
+        self.nextRound()
+
+
+if __name__ == "__main__":
+    player1 = Player("Ethan")
+    player2 = Player("Roger", True)
+
+    game = Game(5).setPlayers([player1, player2])
+    game.startGame()
