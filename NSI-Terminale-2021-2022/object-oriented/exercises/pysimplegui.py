@@ -11,25 +11,19 @@ class IndividuT1():
         self.couleurTexte = couleurTexte        
         self.couleurFond = couleurFond    
         
-    def deplacerHorizontal(self):        
-        if self.x <  MAX_COL - 1:            
-            self.x +=1        
-        else:            
-            self.x = 0            
-            if self.y <  MAX_ROWS - 1:                
-                self.y +=1            
-            else:                
-                self.y = 0
-
-    def deplacerVertical(self):
-        if self.y < MAX_ROWS - 1:
-            self.y += 1
+    def deplacerHorizontal(self, dis):        
+        nextX = self.x + dis
+        if 0 <= nextX > MAX_COL:
+            self.x = nextX
         else:
-            self.y = 0
-            if self.x < MAX_COL -1:
-                self.x += 1
-            else:
-                self.y = 0
+            self.x = MAX_COL if nextX >= 0 else 0
+
+    def deplacerVertical(self, dis):
+        nextY = self.y + dis
+        if 0 <= nextY > MAX_ROWS:
+            self.y = nextY
+        else:
+            self.y = MAX_ROWS if nextY >= 0 else 0
 
 # -------------- Programme principal - Appel des fonctions -------------------------------------
 
@@ -37,7 +31,7 @@ class IndividuT1():
 
 # -- Objets de type Individu --
 individu1 = IndividuT1(0, 0,'+', 'white','purple') # (x, y, label, couleurTexte, couleurFond)
-individu2 = IndividuT1(0, 0, "-", "white", 'purple')
+# individu2 = IndividuT1(0, 0, "-", "white", 'green')
 # -- Paramètres de l'inteface graphique --
 MAX_ROWS = MAX_COL = 10
 board = [[randint(0,1) for j in range(MAX_COL)] for i in range(MAX_ROWS)]
@@ -60,14 +54,11 @@ while True:
     couleurFond = individu1.couleurFond   
     window[(i, j)].update(label, button_color=(couleurTexte,couleurFond)) 
 
-    i = individu2.y    
-    j = individu2.x    
-    label = individu2.label    
-    couleurTexte = individu2.couleurTexte   
-    couleurFond = individu2.couleurFond   
-    window[(i, j)].update(label, button_color=(couleurTexte,couleurFond)) 
+    x = randint(-1, 1)
+    y = randint(-1, 1)
+    print(x, y)
+    individu1.deplacerVertical(y)
+    individu1.deplacerHorizontal(x)
 
-    individu1.deplacerVertical()
-    individu2.deplacerHorizontal()
 # ---- Fin / Fermer fenêtre graphique ----
 window.close()
