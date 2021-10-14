@@ -20,7 +20,7 @@ class IndividuT1():
         else:
             self.x = MAX_COL-1 if nextX >= 0 else 0
 
-    def deplacerVertical(self, dis):
+    def deplacerVertical(self, dis, individuAutre):
         nextY = self.y + dis
         if 0 <= nextY < MAX_ROWS-1:
             self.y = nextY
