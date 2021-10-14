@@ -3,12 +3,12 @@ from pprint import pprint
 
 class Space:
 
-    def __init__(self):
-        self.__board = self.__initBoard()
+    def __init__(self, size):
+        self.__size = size
         self.__players = []
 
-    def __initBoard(self, size=10):
-        return [[0 for _ in range(size)] for _ in range(size)]
+    def getSize(self):
+        return self.__size
 
     def getFullBoard(self):
         return self.__board
@@ -31,26 +31,25 @@ class Player():
         self.__space = space
     
     def nextMove(self):
-        board = self.__space.getFullBoard()
+        MAX = self.__space.getSize()
         nextCoords = (self.x + random.randint(-1, 1), self.y + random.randint(-1, 1))
         for player in self.__space.getPlayer():
             if not player.canIMove(nextCoords): return
-        if 0 <= nextCoords[0] < len(board)-1:
+        if 0 <= nextCoords[0] < MAX-1:
             self.x = nextCoords[0]
         else:
-            self.x = len(board)-1 if nextCoords[0] >= 0 else 0
+            self.x = MAX-1 if nextCoords[0] >= 0 else 0
 
-        if 0 <= nextCoords[1] < len(board)-1:
+        if 0 <= nextCoords[1] < MAX-1:
             self.y = nextCoords[1]
         else:
-            self.y = len(board)-1 if nextCoords[1] >= 0 else 0
+            self.y = MAX-1 if nextCoords[1] >= 0 else 0
         
     def canIMove(self, coords):
         myCoords = (self.x, self.y)
         return False if myCoords == coords else True
 
 space = Space()
-pprint(space.getFullBoard())
 player1 = Player("1", 5, 5, "white", "blue", space)
 space.addPlayer(player1)
 player1.nextMove()
